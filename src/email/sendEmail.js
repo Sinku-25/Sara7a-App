@@ -1,6 +1,8 @@
 import nodemailer from 'nodemailer';
 import { emailTemplet } from './emailTemplet.js';
 export async function  sendEmail(option){
+  console.log(option);
+  
     // gafa vysq sqih mydw
 const transporter = nodemailer.createTransport({
     service:"gmail",

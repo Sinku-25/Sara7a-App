@@ -10,5 +10,15 @@ connection();
 app.use(express.json());
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/message", messageRouter);
+
+
+app.use("*",(req,res,next)=>{
+    next(new Error(`Invalid Url ${req.originalUrl}`));
+})
+ // Global Error Handling
+app.use((err,req,res,next)=>{
+    process.env.MODE == 'dev' ? res.json({err:err.message,stack:err.stack}) : res.json({err:err.message})
+  
+})
 app.get("/", (req, res) => res.send("Hello World!"));
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

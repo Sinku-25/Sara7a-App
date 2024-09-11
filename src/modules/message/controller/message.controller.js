@@ -1,8 +1,9 @@
 import messageModel from "../../../../db/models/message.model.js";
 import userModel from "../../../../db/models/user.model.js";
 import { sendEmail } from "../../../email/sendEmail.js";
-export const addMessage = async (req, res, next) => {
-  try {
+import { handerError } from "../../../middleware/handelError.js";
+export const addMessage = handerError(async (req, res, next) => {
+  
     let { messageText, receivedId } = req.body;
     let existUser = await userModel.findById(receivedId);
     if (!existUser) return res.json({ message: "Invalid User" });
@@ -11,10 +12,8 @@ export const addMessage = async (req, res, next) => {
       receivedId,
     });
     res.json({ message: "Success", addedMessage });
-  } catch (error) {
-    res.json({ message: "ERROR", error });
-  }
-};
+
+});
 
 export const getMessages = async (req, res) => {
 

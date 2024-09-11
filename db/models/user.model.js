@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      minLength: [3, "name is too short"], // Corrected this line
+      minLength:[3, "name is too short"], // Corrected this line
       required: true,
     },
     email: {
